@@ -1,51 +1,51 @@
-# Gemini CLI Tool Mapping
+# Gemini CLI 工具映射
 
-Skills use Claude Code tool names. When you encounter these in a skill, use your platform equivalent:
+Skills 使用 Claude Code 的工具名。在 skill 中遇到这些时，请使用你平台的等价物：
 
-| Skill references | Gemini CLI equivalent |
+| Skill 引用 | Gemini CLI 等价物 |
 |-----------------|----------------------|
-| `Read` (file reading) | `read_file` |
-| `Write` (file creation) | `write_file` |
-| `Edit` (file editing) | `replace` |
-| `Bash` (run commands) | `run_shell_command` |
-| `Grep` (search file content) | `grep_search` |
-| `Glob` (search files by name) | `glob` |
-| `TodoWrite` (task tracking) | `write_todos` |
-| `Skill` tool (invoke a skill) | `activate_skill` |
+| `Read`（读取文件） | `read_file` |
+| `Write`（创建文件） | `write_file` |
+| `Edit`（编辑文件） | `replace` |
+| `Bash`（运行命令） | `run_shell_command` |
+| `Grep`（按内容搜索文件） | `grep_search` |
+| `Glob`（按文件名搜索） | `glob` |
+| `TodoWrite`（任务追踪） | `write_todos` |
+| `Skill` 工具（调用一个 skill） | `activate_skill` |
 | `WebSearch` | `google_web_search` |
 | `WebFetch` | `web_fetch` |
-| `Task` tool (dispatch subagent) | `@agent-name` (see [Subagent support](#subagent-support)) |
+| `Task` 工具（调度子代理） | `@agent-name`（见[子代理支持](#subagent-support)） |
 
-## Subagent support
+## 子代理支持
 
-Gemini CLI supports subagents natively via the `@` syntax. Use the built-in `@generalist` agent to dispatch any task — it has access to all tools and follows the prompt you provide.
+Gemini CLI 通过 `@` 语法原生支持子代理。使用内置的 `@generalist` 代理来调度任何任务——它能访问所有工具，并遵循你提供的 prompt。
 
-When a skill says to dispatch a named agent type, use `@generalist` with the full prompt from the skill's prompt template:
+当 skill 说要调度一个有名字的代理类型时，使用 `@generalist` 并传入 skill 的 prompt 模板的完整填充内容：
 
-| Skill instruction | Gemini CLI equivalent |
+| Skill 指令 | Gemini CLI 等价物 |
 |-------------------|----------------------|
-| `Task tool (superpowers:implementer)` | `@generalist` with the filled `implementer-prompt.md` template |
-| `Task tool (superpowers:spec-reviewer)` | `@generalist` with the filled `spec-reviewer-prompt.md` template |
-| `Task tool (superpowers:code-reviewer)` | `@code-reviewer` (bundled agent) or `@generalist` with the filled review prompt |
-| `Task tool (superpowers:code-quality-reviewer)` | `@generalist` with the filled `code-quality-reviewer-prompt.md` template |
-| `Task tool (general-purpose)` with inline prompt | `@generalist` with your inline prompt |
+| `Task tool (superpowers:implementer)` | `@generalist` 加上填好的 `implementer-prompt.md` 模板 |
+| `Task tool (superpowers:spec-reviewer)` | `@generalist` 加上填好的 `spec-reviewer-prompt.md` 模板 |
+| `Task tool (superpowers:code-reviewer)` | `@code-reviewer`（捆绑的代理）或 `@generalist` 加上填好的评审 prompt |
+| `Task tool (superpowers:code-quality-reviewer)` | `@generalist` 加上填好的 `code-quality-reviewer-prompt.md` 模板 |
+| `Task tool (general-purpose)` 加内联 prompt | `@generalist` 加上你的内联 prompt |
 
-### Prompt filling
+### Prompt 填充
 
-Skills provide prompt templates with placeholders like `{WHAT_WAS_IMPLEMENTED}` or `[FULL TEXT of task]`. Fill all placeholders and pass the complete prompt as the message to `@generalist`. The prompt template itself contains the agent's role, review criteria, and expected output format — `@generalist` will follow it.
+Skills 提供带占位符的 prompt 模板，如 `{WHAT_WAS_IMPLEMENTED}` 或 `[FULL TEXT of task]`。填好所有占位符，把完整 prompt 作为消息传给 `@generalist`。prompt 模板本身就包含代理的角色、评审标准和预期输出格式——`@generalist` 会遵循它。
 
-### Parallel dispatch
+### 并行调度
 
-Gemini CLI supports parallel subagent dispatch. When a skill asks you to dispatch multiple independent subagent tasks in parallel, request all of those `@generalist` or named subagent tasks together in the same prompt. Keep dependent tasks sequential, but do not serialize independent subagent tasks just to preserve a simpler history.
+Gemini CLI 支持子代理并行调度。当 skill 要求你并行调度多个独立的子代理任务时，把所有这些 `@generalist` 或具名子代理任务放在同一个 prompt 中一起请求。让有依赖的任务保持顺序，但不要为了简化历史而把独立的子代理任务串行化。
 
-## Additional Gemini CLI tools
+## Gemini CLI 额外工具
 
-These tools are available in Gemini CLI but have no Claude Code equivalent:
+Gemini CLI 中有这些工具，但在 Claude Code 中没有等价物：
 
-| Tool | Purpose |
+| 工具 | 用途 |
 |------|---------|
-| `list_directory` | List files and subdirectories |
-| `save_memory` | Persist facts to GEMINI.md across sessions |
-| `ask_user` | Request structured input from the user |
-| `tracker_create_task` | Rich task management (create, update, list, visualize) |
-| `enter_plan_mode` / `exit_plan_mode` | Switch to read-only research mode before making changes |
+| `list_directory` | 列出文件和子目录 |
+| `save_memory` | 持久化事实到 GEMINI.md，跨会话保留 |
+| `ask_user` | 向用户请求结构化输入 |
+| `tracker_create_task` | 富任务管理（创建、更新、列出、可视化） |
+| `enter_plan_mode` / `exit_plan_mode` | 切换到只读研究模式，再做变更 |

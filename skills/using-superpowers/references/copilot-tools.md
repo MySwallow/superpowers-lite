@@ -1,42 +1,42 @@
-# Copilot CLI Tool Mapping
+# Copilot CLI 工具映射
 
-Skills use Claude Code tool names. When you encounter these in a skill, use your platform equivalent:
+Skills 使用 Claude Code 的工具名。在 skill 中遇到这些时，请使用你平台的等价物：
 
-| Skill references | Copilot CLI equivalent |
+| Skill 引用 | Copilot CLI 等价物 |
 |-----------------|----------------------|
-| `Read` (file reading) | `view` |
-| `Write` (file creation) | `create` |
-| `Edit` (file editing) | `edit` |
-| `Bash` (run commands) | `bash` |
-| `Grep` (search file content) | `grep` |
-| `Glob` (search files by name) | `glob` |
-| `Skill` tool (invoke a skill) | `skill` |
+| `Read`（读取文件） | `view` |
+| `Write`（创建文件） | `create` |
+| `Edit`（编辑文件） | `edit` |
+| `Bash`（运行命令） | `bash` |
+| `Grep`（按内容搜索文件） | `grep` |
+| `Glob`（按文件名搜索） | `glob` |
+| `Skill` 工具（调用一个 skill） | `skill` |
 | `WebFetch` | `web_fetch` |
-| `Task` tool (dispatch subagent) | `task` with `agent_type: "general-purpose"` or `"explore"` |
-| Multiple `Task` calls (parallel) | Multiple `task` calls |
-| Task status/output | `read_agent`, `list_agents` |
-| `TodoWrite` (task tracking) | `sql` with built-in `todos` table |
-| `WebSearch` | No equivalent — use `web_fetch` with a search engine URL |
-| `EnterPlanMode` / `ExitPlanMode` | No equivalent — stay in the main session |
+| `Task` 工具（调度子代理） | `task`，带 `agent_type: "general-purpose"` 或 `"explore"` |
+| 多次 `Task` 调用（并行） | 多次 `task` 调用 |
+| Task 状态/输出 | `read_agent`、`list_agents` |
+| `TodoWrite`（任务追踪） | `sql` 操作内置的 `todos` 表 |
+| `WebSearch` | 无等价物——用 `web_fetch` 加搜索引擎 URL |
+| `EnterPlanMode` / `ExitPlanMode` | 无等价物——保持在主会话 |
 
-## Async shell sessions
+## 异步 shell 会话
 
-Copilot CLI supports persistent async shell sessions, which have no direct Claude Code equivalent:
+Copilot CLI 支持持久化的异步 shell 会话，这在 Claude Code 中没有直接等价物：
 
-| Tool | Purpose |
+| 工具 | 用途 |
 |------|---------|
-| `bash` with `async: true` | Start a long-running command in the background |
-| `write_bash` | Send input to a running async session |
-| `read_bash` | Read output from an async session |
-| `stop_bash` | Terminate an async session |
-| `list_bash` | List all active shell sessions |
+| `bash` 带 `async: true` | 在后台启动一个长运行命令 |
+| `write_bash` | 向运行中的异步会话发送输入 |
+| `read_bash` | 从异步会话读取输出 |
+| `stop_bash` | 终止一个异步会话 |
+| `list_bash` | 列出所有活跃的 shell 会话 |
 
-## Additional Copilot CLI tools
+## Copilot CLI 额外工具
 
-| Tool | Purpose |
+| 工具 | 用途 |
 |------|---------|
-| `store_memory` | Persist facts about the codebase for future sessions |
-| `report_intent` | Update the UI status line with current intent |
-| `sql` | Query the session's SQLite database (todos, metadata) |
-| `fetch_copilot_cli_documentation` | Look up Copilot CLI documentation |
-| GitHub MCP tools (`github-mcp-server-*`) | Native GitHub API access (issues, PRs, code search) |
+| `store_memory` | 持久化关于代码库的事实供未来会话使用 |
+| `report_intent` | 用当前意图更新 UI 状态行 |
+| `sql` | 查询会话的 SQLite 数据库（todos、元数据） |
+| `fetch_copilot_cli_documentation` | 查阅 Copilot CLI 文档 |
+| GitHub MCP 工具（`github-mcp-server-*`） | 原生 GitHub API 访问（issues、PRs、代码搜索） |

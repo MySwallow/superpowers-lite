@@ -1,69 +1,69 @@
 ---
 name: executing-plans
-description: Use when you have a written implementation plan to execute in a separate session with review checkpoints
+description: 当你有一份书面实施计划，需要在独立会话中执行并设置评审检查点时使用
 ---
 
-# Executing Plans
+# 执行计划
 
-## Overview
+## 概述
 
-Load plan, review critically, execute all tasks, report when complete.
+加载计划，批判性地审查，执行所有任务，完成后汇报。
 
-**Announce at start:** "I'm using the executing-plans skill to implement this plan."
+**开始时声明：** "我正在使用 executing-plans skill 来实施这份计划。"
 
-**Note:** When subagent support is available (Claude Code), use the subagent-driven-development skill instead for higher quality.
+**注意：** 如果支持子代理（Claude Code），优先使用 subagent-driven-development skill，质量更高。
 
-## The Process
+## 流程
 
-### Step 1: Load and Review Plan
-1. Read plan file
-2. Review critically - identify any questions or concerns about the plan
-3. If concerns: Raise them with your human partner before starting
-4. If no concerns: Create TodoWrite and proceed
+### 步骤 1：加载并审查计划
+1. 读取计划文件
+2. 批判性审查——识别对计划的任何疑问或顾虑
+3. 如有顾虑：开始前先向你的协作伙伴提出
+4. 若无顾虑：创建 TodoWrite 并继续
 
-### Step 2: Execute Tasks
+### 步骤 2：执行任务
 
-For each task:
-1. Mark as in_progress
-2. Follow each step exactly (plan has bite-sized steps)
-3. Run verifications as specified
-4. Mark as completed
+每项任务：
+1. 标记为 in_progress
+2. 严格按每个步骤执行（计划包含细粒度步骤）
+3. 按规范运行验证
+4. 标记为 completed
 
-### Step 3: Complete Development
+### 步骤 3：完成开发
 
-After all tasks complete and verified:
-- Run static checks (type check / lint / build) per project conventions
-- Report completion to the user — do not auto-commit or open a PR
-- Let the user decide when/how to integrate the work
+所有任务完成并验证后：
+- 按项目惯例运行静态检查（类型检查 / lint / 构建）
+- 向用户汇报完成——不要自动提交或开 PR
+- 让用户决定何时以及如何整合工作
 
-## When to Stop and Ask for Help
+## 何时停下来求助
 
-**STOP executing immediately when:**
-- Hit a blocker (missing dependency, test fails, instruction unclear)
-- Plan has critical gaps preventing starting
-- You don't understand an instruction
-- Verification fails repeatedly
+**立刻停止执行，当：**
+- 遇到障碍（缺少依赖、测试失败、指令不清）
+- 计划存在关键缺口，无法开始
+- 你不理解某个指令
+- 验证反复失败
 
-**Ask for clarification rather than guessing.**
+**与其猜测，不如寻求澄清。**
 
-## When to Revisit Earlier Steps
+## 何时回到前面的步骤
 
-**Return to Review (Step 1) when:**
-- Partner updates the plan based on your feedback
-- Fundamental approach needs rethinking
+**回到审查（步骤 1），当：**
+- 协作伙伴根据你的反馈更新了计划
+- 整体方案需要重新思考
 
-**Don't force through blockers** - stop and ask.
+**不要强行突破阻碍**——停下并询问。
 
-## Remember
-- Review plan critically first
-- Follow plan steps exactly
-- Don't skip verifications
-- Reference skills when plan says to
-- Stop when blocked, don't guess
-- Never start implementation on main/master branch without explicit user consent
+## 记住
+- 先批判性地审查计划
+- 严格按计划步骤执行
+- 不要跳过验证
+- 计划要求引用某 skill 时就引用
+- 受阻时停下，不要猜测
+- 未经用户明确同意，绝不在 main/master 分支上开始实施
 
-## Integration
+## 集成
 
-**Related skills:**
-- **writing-plans** - Creates the plan this skill executes
-- **subagent-driven-development** - Alternative: execute via subagents in same session
+**相关 skills：**
+- **writing-plans** - 创建本 skill 要执行的计划
+- **subagent-driven-development** - 替代方案：在同一会话中通过子代理执行

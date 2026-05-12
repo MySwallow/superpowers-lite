@@ -2,8 +2,9 @@
 # Install agent-skills into ~/.claude/skills/ (Claude Code user scope)
 #
 # Usage:
-#   ./install-claude-code.sh              # install English skills
-#   ./install-claude-code.sh --lang zh    # install Chinese skills
+#   ./install-claude-code.sh              # install Chinese skills (default)
+#   ./install-claude-code.sh --lang en    # install English skills
+#   ./install-claude-code.sh --lang zh    # explicit Chinese (same as default)
 #   ./install-claude-code.sh --uninstall  # remove installed skills
 
 set -euo pipefail
@@ -17,9 +18,9 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --lang)
       shift
-      case "${1:-en}" in
-        en) LANG_DIR="skills" ;;
-        zh) LANG_DIR="skills-zh" ;;
+      case "${1:-zh}" in
+        zh) LANG_DIR="skills" ;;
+        en) LANG_DIR="skills-en" ;;
         *) echo "Unknown language: $1. Use 'en' or 'zh'." >&2; exit 1 ;;
       esac
       shift
