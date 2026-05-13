@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install agent-skills into ~/.claude/skills/ (Claude Code user scope)
+# Install superpowers-lite into ~/.claude/skills/ (Claude Code user scope)
 #
 # Usage:
 #   ./install-claude-code.sh              # install Chinese skills (default)

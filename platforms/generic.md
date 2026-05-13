@@ -8,12 +8,12 @@ Most AI coding assistants (Cursor, Windsurf, Cline, Aider, etc.) support a "rule
 
 ### Example: Cursor
 
-Add to `.cursor/rules/agent-skills.md`:
+Add to `.cursor/rules/superpowers-lite.md`:
 
 ```markdown
 # Agent Skills
 
-When the user asks about debugging, planning, or implementing features, follow the methodology from `agent-skills/skills/`:
+When the user asks about debugging, planning, or implementing features, follow the methodology from `superpowers-lite/skills/`:
 
 - For debugging: read `skills/systematic-debugging/SKILL.md`
 - For planning: read `skills/writing-plans/SKILL.md`
@@ -32,7 +32,7 @@ Similar approach — add a rules file pointing to the skills directory.
 Use the `--read` flag at startup:
 
 ```bash
-aider --read agent-skills/skills/using-superpowers/SKILL.md
+aider --read superpowers-lite/skills/using-superpowers/SKILL.md
 ```
 
 ## Tool-name caveats

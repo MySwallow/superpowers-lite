@@ -3,8 +3,8 @@
 ## Quick install (English skills)
 
 ```bash
-git clone https://github.com/MySwallow/agent-skills.git
-cd agent-skills
+git clone https://github.com/MySwallow/superpowers-lite.git
+cd superpowers-lite
 ./scripts/install-claude-code.sh
 ```
 

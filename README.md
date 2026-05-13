@@ -1,4 +1,4 @@
-# agent-skills
+# superpowers-lite
 
 精简版、多平台的 AI 编码 agent skill 集合。
 
@@ -67,8 +67,8 @@
 ### Claude Code 一行安装
 
 ```bash
-git clone https://github.com/MySwallow/agent-skills.git
-cd agent-skills
+git clone https://github.com/MySwallow/superpowers-lite.git
+cd superpowers-lite
 ./scripts/install-claude-code.sh
 ```
 
@@ -109,6 +109,6 @@ MIT —— 详见 [LICENSE](LICENSE)。
 ## 致谢
 
 - 上游 `superpowers` 插件作者 **Jesse Vincent** ([@obra](https://github.com/obra/superpowers-marketplace)) —— 提供了核心方法论和 skill 设计
-- 本 fork **agent-skills** —— 去掉强制仪式（TDD、自动 commit、worktree），扩展多平台支持
+- 本 fork **superpowers-lite** —— 去掉强制仪式（TDD、自动 commit、worktree），扩展多平台支持
 
 如果觉得有用，可以赞助上游作者：[github.com/sponsors/obra](https://github.com/sponsors/obra)

@@ -1,4 +1,4 @@
-# agent-skills
+# superpowers-lite
 
 A trimmed, multi-platform pack of coding-agent skills for AI assistants.
 
@@ -69,8 +69,8 @@ Install instructions per platform:
 The default install is the **Chinese** version. Add `--lang en` for English:
 
 ```bash
-git clone https://github.com/MySwallow/agent-skills.git
-cd agent-skills
+git clone https://github.com/MySwallow/superpowers-lite.git
+cd superpowers-lite
 ./scripts/install-claude-code.sh --lang en
 ```
 
@@ -111,6 +111,6 @@ This is a derivative work of `superpowers` by Jesse Vincent (@obra). The origina
 ## Credits
 
 - Original `superpowers` plugin by **Jesse Vincent** ([@obra](https://github.com/obra/superpowers-marketplace)) — the foundational methodology and skill design
-- This fork **agent-skills** — trims forced rituals (TDD, auto-commit, worktrees) and broadens platform support
+- This fork **superpowers-lite** — trims forced rituals (TDD, auto-commit, worktrees) and broadens platform support
 
 If you find this useful, consider sponsoring the upstream author: [github.com/sponsors/obra](https://github.com/sponsors/obra).
