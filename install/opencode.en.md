@@ -10,10 +10,10 @@ If any step fails, STOP and report the exact failure to the user.
 
 ## Step 1: Language is preset
 
-This installer uses the **Chinese** skill set (`skills/`). The language is
+This installer uses the **English** skill set (`skills-en/`). The language is
 fixed by the URL the user picked — do **not** ask them.
 
-Let `SKILL_SRC=skills` for the steps below.
+Let `SKILL_SRC=skills-en` for the steps below.
 
 ---
 
@@ -81,7 +81,7 @@ If verification fails, STOP and report.
 
 Tell the user, in plain language:
 
-1. Installed: Chinese skill set (`skills/`)
+1. Installed: English skill set (`skills-en/`)
 2. Install path: `~/.config/opencode/skills/`
 3. AGENTS.md was updated at: `~/.config/opencode/AGENTS.md`
 4. **Restart opencode** to load the new skills

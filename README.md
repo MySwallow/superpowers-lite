@@ -58,17 +58,17 @@
 
 ### 🌟 最简单：让你的 AI 自己装
 
-挑你当前平台对应的 URL，把它粘到 AI 终端里：
+挑你当前平台 + 语言对应的 URL，把它粘到 AI 终端里：
 
-| 平台 | 跟 AI 说："帮我安装 superpowers-lite，按这个链接操作：" |
-|---|---|
-| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` |
-| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` |
-| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` |
-| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` |
-| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` |
+| 平台 | 中文（默认） | English |
+|---|---|---|
+| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.en.md` |
+| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md` |
+| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md` |
+| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md` |
+| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
 
-每个 URL 对应一份针对该平台的指令，AI 读完会下载 skill 并装到对应的全局目录（`~/.claude/skills/`、`~/.config/opencode/skills/` 等）。
+URL 本身就决定语言——AI 不会再问。每份链接对应一份针对该平台的指令，AI 读完会下载 skill 并装到对应的全局目录（`~/.claude/skills/`、`~/.config/opencode/skills/` 等）。Claude Code 还会额外注册一个 SessionStart hook，让每个新会话自动加载 `using-superpowers`（需要 `jq`，缺失时优雅跳过）。
 
 完整说明见 [INSTALL.md](INSTALL.md)。
 

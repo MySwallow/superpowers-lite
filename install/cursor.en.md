@@ -14,10 +14,10 @@ current project's rules directory.
 
 ## Step 1: Language is preset
 
-This installer uses the **Chinese** skill set (`skills/`). The language is
+This installer uses the **English** skill set (`skills-en/`). The language is
 fixed by the URL the user picked — do **not** ask them.
 
-Let `SKILL_SRC=skills` for the steps below.
+Let `SKILL_SRC=skills-en` for the steps below.
 
 ---
 
@@ -93,7 +93,7 @@ If not, STOP and report.
 
 Tell the user:
 
-1. Installed: Chinese skill set (`skills/`)
+1. Installed: English skill set (`skills-en/`)
 2. Skills location: `~/.superpowers-lite/skills/`
 3. Rules file added: `$RULES_DIR/superpowers-lite.md`
 4. **Reload the project or restart the IDE** so rules pick up

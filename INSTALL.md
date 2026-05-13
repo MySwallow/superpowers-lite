@@ -1,18 +1,23 @@
 # Installing superpowers-lite
 
-Pick the install URL for **your platform** and paste it into your AI:
+Pick the install URL for **your platform and your preferred language**, then paste it into your AI:
 
-| Platform | Tell your AI: "Please install superpowers-lite. Follow:" |
-|---|---|
-| Claude Code | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md> |
-| opencode | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md> |
-| Codex CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md> |
-| Gemini CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md> |
-| Cursor / Windsurf / Cline | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md> |
+| Platform | 中文 (default) | English |
+|---|---|---|
+| Claude Code | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.en.md> |
+| opencode | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md> |
+| Codex CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md> |
+| Gemini CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md> |
+| Cursor / Windsurf / Cline | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md> |
 
-Each per-platform installer is self-contained: it tells the AI to ask
-about language preference, download the repo, install to that platform's
-correct global directory, verify, and report back.
+The URL itself determines the language — the AI will **not** ask. Each
+per-platform installer is self-contained: it downloads the repo, installs
+to that platform's correct global directory, verifies, and reports back.
+
+> **Claude Code only:** the installer also registers a `SessionStart` hook
+> that injects `using-superpowers` at the start of every new session
+> (keeps skill trigger rate high). Requires `jq`; skipped gracefully if
+> missing.
 
 **Re-running an installer upgrades cleanly** — it removes the 7 known
 skill folders before copying fresh, so stale files from older versions

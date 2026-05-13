@@ -58,19 +58,22 @@ See git history for line-by-line diffs.
 
 ### 🌟 Easiest: let your AI install it
 
-Pick the URL for **your platform** and paste it into your AI:
+Pick the URL for **your platform + preferred language**, then paste it into your AI:
 
-| Platform | Tell your AI: "Please install superpowers-lite. Follow:" |
-|---|---|
-| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` |
-| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` |
-| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` |
-| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` |
-| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` |
+| Platform | 中文 (default) | English |
+|---|---|---|
+| Claude Code | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/claude-code.en.md` |
+| opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md` |
+| Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md` |
+| Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md` |
+| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
 
-Each URL contains platform-specific instructions. The AI will download the
-skills and install them to the correct global directory (`~/.claude/skills/`,
-`~/.config/opencode/skills/`, etc.) and report where they ended up.
+The URL itself determines the language — the AI will **not** ask. Each URL
+contains platform-specific instructions. The AI downloads the skills,
+installs them to the correct global directory (`~/.claude/skills/`,
+`~/.config/opencode/skills/`, etc.), and reports back. Claude Code installs
+also register a `SessionStart` hook that auto-injects `using-superpowers`
+on every new session (requires `jq`; skipped gracefully if missing).
 
 Full overview: [INSTALL.md](INSTALL.md).
 

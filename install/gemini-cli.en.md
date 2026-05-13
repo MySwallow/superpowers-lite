@@ -28,10 +28,10 @@ If the user is happy with Path A, you are done. Stop here.
 
 ### Step 1: Language is preset
 
-This installer uses the **Chinese** skill set (`skills/`). The language is
+This installer uses the **English** skill set (`skills-en/`). The language is
 fixed by the URL the user picked — do **not** ask them.
 
-Let `SKILL_SRC=skills` for the steps below.
+Let `SKILL_SRC=skills-en` for the steps below.
 
 ### Step 2: Download
 
