@@ -59,8 +59,15 @@ cd superpowers-lite
    Common locations:
    - opencode: `~/.config/opencode/skills/`
    - Codex: `~/.codex/skills/`
-   - Cursor / Windsurf / Cline: copy `templates/cursor-rules.md` into your
-     project's rules directory
+   - Cursor / Windsurf / Cline: copy `skills/` (or `skills-en/`) to
+     `~/.superpowers-lite/skills/`, then copy
+     `templates/cursor-rules.zh.mdc` (or `cursor-rules.en.mdc`) into your
+     project's rules directory **as `.mdc`** (e.g.
+     `.cursor/rules/superpowers-lite.mdc`), and replace every
+     `<SKILLS_PATH>` placeholder with the absolute path
+     `$HOME/.superpowers-lite/skills`. The rule must keep
+     `alwaysApply: true` in its frontmatter — see [install/cursor.md](install/cursor.md)
+     for full reasoning.
 3. Verify by asking the AI to brainstorm or debug something — it should
    announce the relevant skill.
 

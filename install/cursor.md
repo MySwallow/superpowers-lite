@@ -1,60 +1,57 @@
-# Installing superpowers-lite on Cursor / Windsurf / Cline
+# 在 Cursor / Windsurf / Cline 上安装 superpowers-lite
 
-You are an AI coding assistant running inside **Cursor, Windsurf, or Cline**
-(or another IDE-embedded AI). The user has asked you to install
-superpowers-lite — 7 coding-methodology skills.
+你是运行在 **Cursor / Windsurf / Cline**（或其他 IDE 内嵌 AI）里的编码助手。
+用户让你安装 superpowers-lite —— 7 个编码方法论 skill。
 
-These tools use **per-project rules**, not global ones, so installation
-puts skills in a shared user-level location and wires them into the
-current project's rules directory.
+这些 IDE 用**项目级 rules**而不是全局 skill，所以安装策略是：把 skill
+文件放到用户级共享目录，再把指引 rule 写进当前项目的 rules 目录。
 
-**Follow these steps strictly.** If any step fails, STOP and report.
+**严格按下面步骤执行，任何一步失败就 STOP 并报告。**
 
 ---
 
-## Step 1: Language is preset
+## Step 1：语言已锁定
 
-This installer uses the **Chinese** skill set (`skills/`). The language is
-fixed by the URL the user picked — do **not** ask them.
+URL 已决定使用**中文** skill 集（`skills/`）。**不要**询问用户。
 
-Let `SKILL_SRC=skills` for the steps below.
-
----
-
-## Step 2: Confirm the current project's rules directory
-
-Detect which IDE you are in:
-
-- **Cursor** → rules go in `<project>/.cursor/rules/`
-- **Windsurf** → rules go in `<project>/.windsurf/rules/` (or similar)
-- **Cline** → rules go in `<project>/.clinerules/` or via system prompt
-- **Unknown** → ASK THE USER for the rules path their tool uses
-
-Let `RULES_DIR` be the absolute path to that directory.
+下面步骤中 `SKILL_SRC=skills`。
 
 ---
 
-## Step 3: Download the repository
+## Step 2：确认当前项目的 rules 目录
+
+判断你在哪个 IDE：
+
+- **Cursor** → rules 目录 `<project>/.cursor/rules/`
+- **Windsurf** → `<project>/.windsurf/rules/`
+- **Cline** → `<project>/.clinerules/`
+- **未知** → 问用户该工具的 rules 目录在哪
+
+把绝对路径记为 `RULES_DIR`。
+
+---
+
+## Step 3：下载仓库
 
 ```bash
 curl -fsSL https://github.com/MySwallow/superpowers-lite/archive/refs/heads/main.tar.gz \
   | tar xz -C /tmp/
 ```
 
-Fallback if `curl`/`tar` is missing:
+如果 `curl` / `tar` 不存在：
 
 ```bash
 git clone --depth=1 https://github.com/MySwallow/superpowers-lite.git /tmp/superpowers-lite-main
 ```
 
-Verify `/tmp/superpowers-lite-main/skills/` has 7 directories.
+验证 `/tmp/superpowers-lite-main/skills/` 下有 7 个目录。
 
 ---
 
-## Step 4: Install skills to a shared location
+## Step 4：把 skill 装到用户级共享目录
 
-Remove any previous superpowers-lite skill folders, then copy fresh. This
-preserves any other files the user has added under `~/.superpowers-lite/skills/`.
+先删旧的 7 个 superpowers-lite skill 文件夹，再复制新版。其他用户自己加在
+`~/.superpowers-lite/skills/` 下的文件会被保留。
 
 ```bash
 mkdir -p ~/.superpowers-lite/skills
@@ -64,48 +61,68 @@ done
 cp -R /tmp/superpowers-lite-main/$SKILL_SRC/* ~/.superpowers-lite/skills/
 ```
 
-(Substitute `$SKILL_SRC` from Step 1.)
+---
+
+## Step 5：写入项目 rule 文件（**关键步骤**）
+
+> 关键事实（已经过印证）：
+> 1. Cursor 项目 rule **必须**用 `.mdc` 后缀（最新 Cursor 2.x 版本里 `.md`
+>    不被识别）
+> 2. 要让 rule **每次会话自动注入到上下文**，frontmatter 必须是
+>    `alwaysApply: true`
+> 3. Cursor agent **不会**主动跨边界 read 用户家目录的文件，所以 rule
+>    内容必须 inline 关键指令 + 给出绝对路径（不能保留 `~`）
+
+执行：
+
+```bash
+# 用 $HOME 展开 ~ 得到绝对路径
+SKILLS_PATH="$HOME/.superpowers-lite/skills"
+
+# 生成 rule 文件（替换模板里的 <SKILLS_PATH> 占位符）
+mkdir -p "$RULES_DIR"
+sed "s|<SKILLS_PATH>|$SKILLS_PATH|g" \
+  /tmp/superpowers-lite-main/templates/cursor-rules.zh.mdc \
+  > "$RULES_DIR/superpowers-lite.mdc"
+```
+
+写入后用 `cat` 或 Read 工具检查 `$RULES_DIR/superpowers-lite.mdc`：
+
+- 第一行必须是 `---`
+- frontmatter 里 `alwaysApply: true`
+- 路径占位符 `<SKILLS_PATH>` 已被替换成 `/Users/xxx/.superpowers-lite/skills`
+  这种**绝对路径**（不应再出现 `~` 或 `<SKILLS_PATH>`）
 
 ---
 
-## Step 5: Wire up the project rules
+## Step 6：验证
 
-Read `/tmp/superpowers-lite-main/templates/cursor-rules.md`. Replace every
-`<SKILLS_PATH>` placeholder with the absolute path `~/.superpowers-lite/skills`
-(expand `~` to the user's home dir).
+- `~/.superpowers-lite/skills/` 下有 7 个 skill 文件夹
+- `$RULES_DIR/superpowers-lite.mdc` 存在
+- rule 文件中的 `<SKILLS_PATH>` 已全部替换为绝对路径
+- frontmatter 里 `alwaysApply: true`
 
-Write the result to `$RULES_DIR/superpowers-lite.md` (or `skills.md` —
-match the existing naming convention in `$RULES_DIR`). Create `$RULES_DIR`
-if it doesn't exist.
-
----
-
-## Step 6: Verify
-
-- `~/.superpowers-lite/skills/` contains 7 skill folders
-- `$RULES_DIR/superpowers-lite.md` exists and references the skills path
-
-If not, STOP and report.
+任意一项不满足 → STOP 并报告。
 
 ---
 
-## Step 7: Report to the user
+## Step 7：告诉用户
 
-Tell the user:
-
-1. Installed: Chinese skill set (`skills/`)
-2. Skills location: `~/.superpowers-lite/skills/`
-3. Rules file added: `$RULES_DIR/superpowers-lite.md`
-4. **Reload the project or restart the IDE** so rules pick up
-5. If they want skills available in other projects too, they need to repeat
-   Step 5 in each project (or symlink the rules file).
+1. 已安装：中文 skill 集（`skills/`）
+2. Skill 路径：`~/.superpowers-lite/skills/`
+3. 项目 rule 文件：`$RULES_DIR/superpowers-lite.mdc`（`.mdc` 后缀很重要）
+4. **请重启 IDE 或 reload 当前窗口**，让 Cursor 重新扫描 rules 目录
+5. 验证：随便问一个 bug 或新功能问题，AI 应该会先声明
+   "Using systematic-debugging to ..." 或 "Using brainstorming to ..." 等
+6. 如果想在其他项目也用，在该项目里重复 Step 5（或把
+   `superpowers-lite.mdc` 软链/复制过去）
 
 ---
 
-## Step 8: Cleanup
+## Step 8：清理
 
 ```bash
 rm -rf /tmp/superpowers-lite-main
 ```
 
-Skip cleanup if any step failed.
+任意步骤失败时跳过清理，方便排查。
