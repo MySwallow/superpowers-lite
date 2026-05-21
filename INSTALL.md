@@ -8,7 +8,9 @@ Pick the install URL for **your platform and your preferred language**, then pas
 | opencode | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md> |
 | Codex CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md> |
 | Gemini CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md> |
-| Cursor / Windsurf / Cline | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md> |
+| Cursor (2.4+) | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md> |
+| Windsurf | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.en.md> |
+| Cline (3.49+) | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.en.md> |
 
 The URL itself determines the language — the AI will **not** ask. Each
 per-platform installer is self-contained: it downloads the repo, installs
@@ -59,17 +61,17 @@ cd superpowers-lite
    Common locations:
    - opencode: `~/.config/opencode/skills/`
    - Codex: `~/.codex/skills/`
-   - Cursor / Windsurf / Cline: copy `skills/` (or `skills-en/`) to
-     `~/.superpowers-lite/skills/`, then copy
-     `templates/cursor-rules.zh.mdc` (or `cursor-rules.en.mdc`) into your
-     project's rules directory **as `.mdc`** (e.g.
-     `.cursor/rules/superpowers-lite.mdc`), and replace every
-     `<SKILLS_PATH>` placeholder with the absolute path
-     `$HOME/.superpowers-lite/skills`. The rule must keep
-     `alwaysApply: true` in its frontmatter — see [install/cursor.md](install/cursor.md)
-     for full reasoning.
-3. Verify by asking the AI to brainstorm or debug something — it should
+   - **Cursor (2.4+)**: `~/.cursor/skills/` (user-level, global)
+   - **Windsurf**: `~/.codeium/windsurf/skills/`
+   - **Cline (3.49+)**: `~/.cline/skills/` (also enable
+     `Settings → Features → Enable Skills`)
+3. Restart the IDE so it re-scans the skills directory.
+4. Verify by asking the AI to brainstorm or debug something — it should
    announce the relevant skill.
+
+> All three IDEs natively support the SKILL.md format (the same Anthropic
+> standard Claude Code uses). They auto-discover skills based on the
+> `description` frontmatter — no rules / config files needed.
 
 ---
 

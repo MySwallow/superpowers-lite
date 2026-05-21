@@ -68,7 +68,9 @@ Pick the URL for **your platform + preferred language**, then paste it into your
 | opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md` |
 | Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md` |
 | Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md` |
-| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
+| Cursor (2.4+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
+| Windsurf | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.en.md` |
+| Cline (3.49+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.en.md` |
 
 The URL itself determines the language — the AI will **not** ask. Each URL
 contains platform-specific instructions. The AI downloads the skills,

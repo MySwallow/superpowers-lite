@@ -1,14 +1,18 @@
-# Installing superpowers-lite on Cursor / Windsurf / Cline
+# Installing superpowers-lite on Cursor
 
-You are an AI coding assistant running inside **Cursor, Windsurf, or Cline**
-(or another IDE-embedded AI). The user has asked you to install
-superpowers-lite — 7 coding-methodology skills.
+You are an AI coding assistant running inside **Cursor** (2.4+). The user
+has asked you to install superpowers-lite — 7 coding-methodology skills.
 
-These tools use **per-project rules** rather than global skills, so the
-strategy is: place skill files in a shared user-level directory, then
-write a guiding rule into the current project's rules directory.
+Cursor 2.4 (released 2026-01-23) natively supports Agent Skills via
+SKILL.md files. We install into Cursor's official **user-level**
+directory `~/.cursor/skills/` — install once, available across all
+projects.
 
 **Follow these steps strictly. If any step fails, STOP and report.**
+
+> Cursor version required: **2.4 or newer**.
+> Older versions (≤ 2.3) do not support Agent Skills — the user must
+> upgrade Cursor first. If unsure, the user can check `Help → About`.
 
 ---
 
@@ -21,16 +25,23 @@ Let `SKILL_SRC=skills-en` for the steps below.
 
 ---
 
-## Step 2: Confirm the current project's rules directory
+## Step 2: (Optional) Clean up legacy bad installs
 
-Detect which IDE you're in:
+If the user previously ran the v1 installer (which incorrectly used
+`~/.superpowers-lite/skills/` + `.cursor/rules/superpowers-lite.{md,mdc}`),
+clean them up. This step **only cleans the current project's** rules
+file — if the user installed in other projects too, they'll need to
+delete `.cursor/rules/superpowers-lite.*` in each one manually.
 
-- **Cursor** → rules go in `<project>/.cursor/rules/`
-- **Windsurf** → `<project>/.windsurf/rules/`
-- **Cline** → `<project>/.clinerules/`
-- **Unknown** → ASK the user where their tool stores rules
+```bash
+# Old shared skills dir (if any)
+rm -rf ~/.superpowers-lite
 
-Let `RULES_DIR` be the absolute path to that directory.
+# Old rule file in the current project (if any)
+rm -f .cursor/rules/superpowers-lite.mdc .cursor/rules/superpowers-lite.md
+```
+
+Non-existent paths are silently skipped — safe to run.
 
 ---
 
@@ -47,90 +58,92 @@ Fallback if `curl` / `tar` is missing:
 git clone --depth=1 https://github.com/MySwallow/superpowers-lite.git /tmp/superpowers-lite-main
 ```
 
-Verify `/tmp/superpowers-lite-main/skills-en/` has 7 directories.
+Verify `/tmp/superpowers-lite-main/skills-en/` contains 7 directories.
 
 ---
 
-## Step 4: Install skills to a shared user-level location
+## Step 4: Install to Cursor's user-level skills directory
 
-Remove any previous superpowers-lite skill folders, then copy fresh. Other
-files the user has added under `~/.superpowers-lite/skills/` are preserved.
+Cursor's docs explicitly scan `~/.cursor/skills/` (user-level, available
+globally). Remove any previous superpowers-lite skill folders first, then
+copy fresh — other files the user has added under `~/.cursor/skills/`
+are preserved.
 
 ```bash
-mkdir -p ~/.superpowers-lite/skills
+mkdir -p ~/.cursor/skills
 for skill_dir in /tmp/superpowers-lite-main/$SKILL_SRC/*/; do
-  rm -rf ~/.superpowers-lite/skills/$(basename "$skill_dir")
+  rm -rf ~/.cursor/skills/$(basename "$skill_dir")
 done
-cp -R /tmp/superpowers-lite-main/$SKILL_SRC/* ~/.superpowers-lite/skills/
+cp -R /tmp/superpowers-lite-main/$SKILL_SRC/* ~/.cursor/skills/
 ```
 
 ---
 
-## Step 5: Write the project rule file (**critical**)
-
-> Verified facts:
-> 1. Cursor project rules **must** use the `.mdc` extension (in recent
->    Cursor 2.x versions, `.md` rules are no longer reliably detected)
-> 2. To make the rule **auto-inject into every chat session**, the
->    frontmatter must be `alwaysApply: true`
-> 3. The Cursor agent does **not** proactively cross-boundary-read files
->    in the user's home directory, so the rule itself must inline the
->    core instructions and give absolute paths (no `~` survives)
-
-Execute:
+## Step 5: Verify
 
 ```bash
-# Expand ~ to an absolute path
-SKILLS_PATH="$HOME/.superpowers-lite/skills"
-
-# Generate the rule file (substitute the <SKILLS_PATH> placeholder)
-mkdir -p "$RULES_DIR"
-sed "s|<SKILLS_PATH>|$SKILLS_PATH|g" \
-  /tmp/superpowers-lite-main/templates/cursor-rules.en.mdc \
-  > "$RULES_DIR/superpowers-lite.mdc"
+ls ~/.cursor/skills/
 ```
 
-After writing, inspect `$RULES_DIR/superpowers-lite.mdc`:
+You must see 7 directories:
 
-- First line must be `---`
-- Frontmatter contains `alwaysApply: true`
-- The `<SKILLS_PATH>` placeholder is fully replaced with an **absolute
-  path** like `/Users/xxx/.superpowers-lite/skills` (no `~`, no
-  `<SKILLS_PATH>` left)
+```
+brainstorming
+dispatching-parallel-agents
+executing-plans
+subagent-driven-development
+systematic-debugging
+using-superpowers
+writing-plans
+```
 
----
-
-## Step 6: Verify
-
-- `~/.superpowers-lite/skills/` contains 7 skill folders
-- `$RULES_DIR/superpowers-lite.mdc` exists
-- All `<SKILLS_PATH>` placeholders in the rule file are replaced
-- Frontmatter has `alwaysApply: true`
-
-If any check fails → STOP and report.
+Each directory must contain a `SKILL.md` file (frontmatter with `name` +
+`description`). If fewer than 7 or any `SKILL.md` is missing, STOP and
+report.
 
 ---
 
-## Step 7: Report to the user
+## Step 6: Report to the user
 
-1. Installed: English skill set (`skills-en/`)
-2. Skills location: `~/.superpowers-lite/skills/`
-3. Project rule file: `$RULES_DIR/superpowers-lite.mdc` (the `.mdc`
-   extension is mandatory)
-4. **Restart the IDE or reload the current window** so Cursor re-scans
-   the rules directory
-5. Smoke test: ask any bug or feature question — the AI should
-   announce e.g. "Using systematic-debugging to ..." or "Using
-   brainstorming to ..." before doing anything else
-6. To use skills in another project, repeat Step 5 there (or
-   symlink/copy `superpowers-lite.mdc` into that project's rules dir)
+1. Installed: English skill set (`skills-en/`), all 7 skills in place
+2. Location: `~/.cursor/skills/` (Cursor user-level directory, global)
+3. **Restart Cursor** (or `Cmd+Shift+P → Developer: Reload Window`) so
+   Cursor re-scans the skills directory
+4. Verify loaded: open `Cursor Settings` (Mac: `Cmd+Shift+J` / Win/Linux:
+   `Ctrl+Shift+J`) → `Rules` → 7 skills should appear in the
+   "**Agent Decides**" section
+5. Also try typing `/` in the chat — you should see the skills listed
+   (e.g. `/using-superpowers`)
+6. Skills auto-trigger via Cursor Agent based on their `description`, or
+   you can explicitly invoke `/skill-name`
 
 ---
 
-## Step 8: Cleanup
+## Step 7: Cleanup temp files
 
 ```bash
 rm -rf /tmp/superpowers-lite-main
 ```
 
-Skip cleanup if any earlier step failed, to make debugging easier.
+Skip cleanup if any earlier step failed, to ease debugging.
+
+---
+
+## Troubleshooting
+
+- **Settings → Rules shows no skills** → check Cursor version is ≥ 2.4
+  (`Help → About`). Skills are unsupported below 2.4.
+- **Skills installed but Agent doesn't auto-use them** → this is expected:
+  Cursor's "Agent Decides" mode picks based on description relevance.
+  Try explicit `/using-superpowers` in chat to confirm loading.
+- **To upgrade** → just re-run this installer URL. Step 4 wipes the 7
+  known skill folders before copying fresh, so any other skill the user
+  added under `~/.cursor/skills/` is preserved.
+- **Full uninstall** → remove both the current install and any v1 leftovers:
+  ```bash
+  # New install (the 7 superpowers-lite skills under ~/.cursor/skills/)
+  rm -rf ~/.cursor/skills/{brainstorming,dispatching-parallel-agents,executing-plans,subagent-driven-development,systematic-debugging,using-superpowers,writing-plans}
+  # Legacy v1 leftovers (if any)
+  rm -rf ~/.superpowers-lite
+  rm -f .cursor/rules/superpowers-lite.mdc .cursor/rules/superpowers-lite.md
+  ```

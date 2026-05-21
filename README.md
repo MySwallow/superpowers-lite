@@ -68,9 +68,11 @@
 | opencode | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/opencode.en.md` |
 | Codex CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/codex.en.md` |
 | Gemini CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/gemini-cli.en.md` |
-| Cursor / Windsurf / Cline | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
+| Cursor (2.4+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
+| Windsurf | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.en.md` |
+| Cline (3.49+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.en.md` |
 
-URL 本身就决定语言——AI 不会再问。每份链接对应一份针对该平台的指令，AI 读完会下载 skill 并装到对应的全局目录（`~/.claude/skills/`、`~/.config/opencode/skills/` 等）。Claude Code 还会额外注册一个 SessionStart hook，让每个新会话自动加载 `using-superpowers`（需要 `jq`，缺失时优雅跳过）。
+URL 本身就决定语言——AI 不会再问。每份链接对应一份针对该平台的指令，AI 读完会下载 skill 并装到对应的全局目录（`~/.claude/skills/`、`~/.config/opencode/skills/`、`~/.cursor/skills/` 等）。Claude Code 还会额外注册一个 SessionStart hook，让每个新会话自动加载 `using-superpowers`（需要 `jq`，缺失时优雅跳过）。Cursor / Windsurf / Cline 原生支持 SKILL.md（Cursor 2.4+、Cline 3.49+），无需额外配置。
 
 完整说明见 [INSTALL.md](INSTALL.md)。
 
