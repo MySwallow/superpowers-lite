@@ -11,6 +11,7 @@ Pick the install URL for **your platform and your preferred language**, then pas
 | Cursor (2.4+) | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md> |
 | Windsurf | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.en.md> |
 | Cline (3.49+) | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.en.md> |
+| GitHub Copilot CLI | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/github-copilot.md> | <https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/github-copilot.en.md> |
 
 The URL itself determines the language — the AI will **not** ask. Each
 per-platform installer is self-contained: it downloads the repo, installs
@@ -65,13 +66,16 @@ cd superpowers-lite
    - **Windsurf**: `~/.codeium/windsurf/skills/`
    - **Cline (3.49+)**: `~/.cline/skills/` (also enable
      `Settings → Features → Enable Skills`)
+   - **GitHub Copilot CLI**: `~/.copilot/skills/` (personal, global —
+     run `/skills reload` inside a session to pick up new skills)
 3. Restart the IDE so it re-scans the skills directory.
 4. Verify by asking the AI to brainstorm or debug something — it should
    announce the relevant skill.
 
-> All three IDEs natively support the SKILL.md format (the same Anthropic
-> standard Claude Code uses). They auto-discover skills based on the
-> `description` frontmatter — no rules / config files needed.
+> Cursor, Windsurf, Cline, and GitHub Copilot CLI all natively support
+> the SKILL.md format (the same Anthropic standard Claude Code uses).
+> They auto-discover skills based on the `description` frontmatter — no
+> rules / config files needed.
 
 ---
 

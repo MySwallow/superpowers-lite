@@ -71,13 +71,17 @@ Pick the URL for **your platform + preferred language**, then paste it into your
 | Cursor (2.4+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cursor.en.md` |
 | Windsurf | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/windsurf.en.md` |
 | Cline (3.49+) | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/cline.en.md` |
+| GitHub Copilot CLI | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/github-copilot.md` | `https://raw.githubusercontent.com/MySwallow/superpowers-lite/main/install/github-copilot.en.md` |
 
 The URL itself determines the language — the AI will **not** ask. Each URL
 contains platform-specific instructions. The AI downloads the skills,
 installs them to the correct global directory (`~/.claude/skills/`,
-`~/.config/opencode/skills/`, etc.), and reports back. Claude Code installs
-also register a `SessionStart` hook that auto-injects `using-superpowers`
-on every new session (requires `jq`; skipped gracefully if missing).
+`~/.config/opencode/skills/`, `~/.copilot/skills/`, etc.), and reports
+back. Claude Code installs also register a `SessionStart` hook that
+auto-injects `using-superpowers` on every new session (requires `jq`;
+skipped gracefully if missing). Cursor / Windsurf / Cline / GitHub
+Copilot CLI natively support the SKILL.md format and auto-discover the
+installed skills (Cursor 2.4+, Cline 3.49+).
 
 Full overview: [INSTALL.md](INSTALL.md).
 
