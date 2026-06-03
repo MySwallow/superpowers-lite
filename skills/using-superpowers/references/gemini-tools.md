@@ -27,7 +27,7 @@ Gemini CLI 通过 `@` 语法原生支持子代理。使用内置的 `@generalist
 | 调度 implementer 子代理 | `@generalist` 加上填好的 `implementer-prompt.md` 模板 |
 | 调度 spec-reviewer 子代理 | `@generalist` 加上填好的 `spec-reviewer-prompt.md` 模板 |
 | 调度 code-reviewer 子代理 | `@code-reviewer`（捆绑的代理）或 `@generalist` 加上填好的评审 prompt |
-| 调度 code-quality-reviewer 子代理 | `@generalist` 加上填好的 `code-quality-reviewer-prompt.md` 模板 |
+| 运行收口质量清理（`/simplify`，无则 `/code-review`） | 激活 `simplify` skill，没有则用 `code-review`（或等价的质量清理流程） |
 | `Task tool (general-purpose)` 加内联 prompt | `@generalist` 加上你的内联 prompt |
 
 ### Prompt 填充

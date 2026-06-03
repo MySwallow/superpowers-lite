@@ -185,7 +185,7 @@ git add tests/path/test.py src/path/file.py
 
 **如果选 Subagent-Driven：**
 - 使用 **subagent-driven-development** skill
-- 每个任务一个全新子代理 + 两阶段评审
+- 每个任务一个全新子代理 + 每任务 spec 评审 + 收口一次质量清理（`/simplify`，无则 `/code-review`）
 
 **如果选 Inline Execution：**
 - 使用 **executing-plans** skill

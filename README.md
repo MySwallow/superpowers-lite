@@ -22,7 +22,7 @@
 | `brainstorming` | ~70 | ~3.9k | 任何创造性工作前 —— 探索意图和需求 |
 | `writing-plans` | ~30 | ~2.3k | 把规格拆成可执行的步骤 |
 | `executing-plans` | ~40 | ~880 | 在当前会话执行已有计划 |
-| `subagent-driven-development` | ~40 | ~4.7k | 用全新子 agent 执行计划，两阶段审核 |
+| `subagent-driven-development` | ~40 | ~4.7k | 用全新子 agent 执行计划，每任务 spec 审核 + 收口清理（`/simplify`，无则 `/code-review`） |
 | `dispatching-parallel-agents` | ~40 | ~2.4k | 2+ 个独立任务并行处理 |
 | `systematic-debugging` | ~40 | ~3.7k | 任何 bug、测试失败、异常行为 |
 
