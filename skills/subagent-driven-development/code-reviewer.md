@@ -4,6 +4,8 @@
 
 **目的：** 在工作连锁推进出更多工作之前，对照计划或需求和代码质量标准评审已完成的工作。
 
+**模型：** 评审是判断密集型任务——用最强模型（opus）调度。在 subagent-driven 流程里，这是所有任务完成后对整个实现做的那一次最终评审。
+
 ```
 Task tool (general-purpose):
   description: "Review code changes"

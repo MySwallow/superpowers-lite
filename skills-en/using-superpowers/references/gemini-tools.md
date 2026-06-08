@@ -26,8 +26,7 @@ When a skill says to dispatch a named agent type, use `@generalist` with the ful
 |-------------------|----------------------|
 | Dispatch implementer subagent | `@generalist` with the filled `implementer-prompt.md` template |
 | Dispatch spec-reviewer subagent | `@generalist` with the filled `spec-reviewer-prompt.md` template |
-| Dispatch code-reviewer subagent | `@code-reviewer` (bundled agent) or `@generalist` with the filled review prompt |
-| Run final quality cleanup (`/simplify`, else `/code-review`) | Activate the `simplify` skill, or `code-review` if absent (or an equivalent quality-cleanup flow) |
+| Dispatch code-reviewer subagent (incl. the final code review) | `@code-reviewer` (bundled agent) or `@generalist` with the filled `code-reviewer.md` template |
 | `Task tool (general-purpose)` with inline prompt | `@generalist` with your inline prompt |
 
 ### Prompt filling

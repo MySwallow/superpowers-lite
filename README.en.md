@@ -22,7 +22,7 @@ Forked and streamlined from [`superpowers`](https://github.com/obra/superpowers-
 | `brainstorming` | ~70 | ~3.9k | Before any creative work — explore intent & requirements |
 | `writing-plans` | ~30 | ~2.3k | Translate spec into bite-sized implementation tasks |
 | `executing-plans` | ~40 | ~880 | Execute a written plan in the current session |
-| `subagent-driven-development` | ~40 | ~4.7k | Execute plan via fresh subagents; per-task spec review + final cleanup (`/simplify`, else `/code-review`) |
+| `subagent-driven-development` | ~40 | ~4.7k | Execute plan via fresh subagents; per-task spec review + a single final code review (with opus) |
 | `dispatching-parallel-agents` | ~40 | ~2.4k | 2+ independent tasks that can run concurrently |
 | `systematic-debugging` | ~40 | ~3.7k | Any bug, test failure, or unexpected behavior |
 

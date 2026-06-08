@@ -4,6 +4,8 @@ Use this template when dispatching a code reviewer subagent.
 
 **Purpose:** Review completed work against requirements and code quality standards before it cascades into more work.
 
+**Model:** Review is judgment-heavy — dispatch with the most capable model (opus). In the subagent-driven flow this is the single final review over the entire implementation after all tasks are done.
+
 ```
 Task tool (general-purpose):
   description: "Review code changes"

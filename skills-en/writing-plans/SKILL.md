@@ -185,7 +185,7 @@ After saving the plan, offer execution choice:
 
 **If Subagent-Driven chosen:**
 - Use the **subagent-driven-development** skill
-- Fresh subagent per task + per-task spec review + a single final cleanup (`/simplify`, else `/code-review`)
+- Fresh subagent per task + per-task spec review + a single final code review (with opus)
 
 **If Inline Execution chosen:**
 - Use the **executing-plans** skill

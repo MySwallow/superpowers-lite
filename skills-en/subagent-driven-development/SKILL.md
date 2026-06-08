@@ -5,11 +5,11 @@ description: Use when executing implementation plans with independent tasks in t
 
 # Subagent-Driven Development
 
-Execute plan by dispatching fresh subagent per task, with a spec compliance review after each. Once all tasks are done, run a single final quality cleanup over the whole implementation: run `/simplify` if available, otherwise fall back to `/code-review`.
+Execute plan by dispatching fresh subagent per task, with a spec compliance review after each. Once all tasks are done, run a single final code review over the whole implementation: dispatch a reviewer subagent using the `./code-reviewer.md` template, with the most capable model (opus).
 
 **Why subagents:** You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
 
-**Core principle:** Fresh subagent per task + per-task spec review + a single final quality cleanup (`/simplify`, else `/code-review`) = high quality, low noise, fast iteration
+**Core principle:** Fresh subagent per task + per-task spec review + a single final code review (with opus) = high quality, low noise, fast iteration
 
 **Continuous execution:** Do not pause to check in with your human partner between tasks. Execute all tasks from the plan without stopping. The only reasons to stop are: BLOCKED status you cannot resolve, ambiguity that genuinely prevents progress, or all tasks complete. "Should I continue?" prompts and progress summaries waste their time — they asked you to execute the plan, so execute it.
 
@@ -36,7 +36,7 @@ digraph when_to_use {
 **vs. Executing Plans (parallel session):**
 - Same session (no context switch)
 - Fresh subagent per task (no context pollution)
-- Spec compliance review after each task; a single quality cleanup once all tasks are done (`/simplify`, else `/code-review`)
+- Spec compliance review after each task; a single final code review over the entire implementation once all tasks are done (with opus)
 - Faster iteration (no human-in-loop between tasks)
 
 ## The Process
@@ -59,7 +59,7 @@ digraph process {
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box];
     "More tasks remain?" [shape=diamond];
-    "Run /simplify (else /code-review) over entire implementation for final quality cleanup" [shape=box];
+    "Dispatch final code reviewer subagent over entire implementation (with opus)" [shape=box];
     "Implementation complete" [shape=box style=filled fillcolor=lightgreen];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
@@ -74,8 +74,8 @@ digraph process {
     "Spec reviewer subagent confirms code matches spec?" -> "Mark task complete in TodoWrite" [label="yes"];
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="yes"];
-    "More tasks remain?" -> "Run /simplify (else /code-review) over entire implementation for final quality cleanup" [label="no"];
-    "Run /simplify (else /code-review) over entire implementation for final quality cleanup" -> "Implementation complete";
+    "More tasks remain?" -> "Dispatch final code reviewer subagent over entire implementation (with opus)" [label="no"];
+    "Dispatch final code reviewer subagent over entire implementation (with opus)" -> "Implementation complete";
 }
 ```
 
@@ -116,7 +116,7 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 
 - `./implementer-prompt.md` - Dispatch implementer subagent
 - `./spec-reviewer-prompt.md` - Dispatch spec compliance reviewer subagent
-- Final quality cleanup (run once after all tasks): use `/simplify` if available, otherwise `/code-review`; it applies fixes directly to the working tree
+- `./code-reviewer.md` - Final code review (run once after all tasks): dispatch a reviewer subagent over the entire implementation with the most capable model (opus); if it finds Critical/Important issues, dispatch the implementer subagent to fix them
 
 ## Example Workflow
 
@@ -175,8 +175,8 @@ Spec reviewer: ✅ Spec compliant now
 
 ...
 
-[After all tasks, run the final cleanup over the entire implementation: /simplify if available, else /code-review]
-/simplify: Applied 3 cleanups (extracted PROGRESS_INTERVAL constant, deduped a helper, simplified one guard). Staged for your review.
+[After all tasks, dispatch a final code reviewer subagent over the entire implementation using ./code-reviewer.md (with opus)]
+Final reviewer: Strengths: clean structure, solid error handling, comprehensive tests. One Minor (missing progress counter). Ready to merge: Yes.
 
 Done!
 ```
@@ -204,10 +204,10 @@ Done!
 - Self-review catches issues before handoff
 - Per-task spec compliance review; review loops ensure fixes actually work
 - Spec compliance prevents over/under-building
-- A single final cleanup pass (`/simplify`, else `/code-review`) handles reuse/simplification/efficiency across the whole implementation (low noise — it applies fixes rather than producing a debatable issue list)
+- A single final code review (with opus) covers the whole implementation functionally: plan alignment, code quality, architecture, testing, production readiness
 
 **Cost:**
-- More subagent invocations (implementer + 1 spec reviewer per task)
+- More subagent invocations (implementer + 1 spec reviewer per task, plus 1 final code review)
 - Controller does more prep work (extracting all tasks upfront)
 - Review loops add iterations
 - But catches issues early (cheaper than debugging later)
@@ -216,7 +216,7 @@ Done!
 
 **Never:**
 - Start implementation on main/master branch without explicit user consent
-- Skip the per-task spec compliance review, or skip the final quality cleanup (`/simplify` / `/code-review`)
+- Skip the per-task spec compliance review, or skip the final code review
 - Proceed with unfixed issues
 - Dispatch multiple implementation subagents in parallel (conflicts)
 - Make subagent read plan file (provide full text instead)
